@@ -1,0 +1,9 @@
+.search_form {
+    margin: 10px 10% ;
+}
+
+.round-icon {
+    border-radius: 50%;
+    width:  100px;
+    height: 100px;
+}
