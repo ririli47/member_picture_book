@@ -13,7 +13,12 @@ class CreateUserProfile extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('user_profiles', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('user_id')->index();
+            $table->text('profile');
+            $table->timestamps();
+        });
     }
 
     /**
@@ -23,6 +28,6 @@ class CreateUserProfile extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('user_profiles');
     }
 }

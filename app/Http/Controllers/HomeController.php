@@ -31,4 +31,9 @@ class HomeController extends Controller
 
         return view('home', ['name' => $member->name]);
     }
+
+    public function edit()
+    {
+        return view('edit');
+    }
 }
