@@ -7,7 +7,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="text-center">
-                <img src="/img/usapi1.png" class="rounded round-icon" alt="icon"><br>
+                <img src="/img/usapi1.png" class="rounded round-icon-home" alt="icon"><br>
                 {{$name}}
             </div>
         </div>
@@ -33,7 +33,15 @@
         @endif
         </div>
     </div>
-    <input type="submit" value="きになる！">
-    
+
+    <div class="row justify-content-center">
+        <a href="/member/interest/{{$member_id}}">
+            <img src="/img/interest.png" class="rounded round-icon" alt="icon">
+            </br>
+            <div class="text-center">
+                <p>きになる！</p>
+            </div>
+        </a>
+    </div>
 </div>
 @endsection
