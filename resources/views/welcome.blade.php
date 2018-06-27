@@ -27,7 +27,10 @@
         @foreach ($members as $member)
             <div class="col-md-4">
                 <div class="text-center">
-                    <img src="/img/usapi1.png" class="rounded round-icon" alt="icon"><br>
+                <a href="/member/{{$member->id}}">
+                    <img src="/img/usapi1.png" class="rounded round-icon" alt="icon">
+                </a>
+                <br>
                     {{$member->name}}
                 </div>
             </div>

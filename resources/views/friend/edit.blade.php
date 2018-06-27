@@ -8,10 +8,12 @@
         {{csrf_field()}}
             <input type="hidden" name="user_id" id="user_id" value={{$user_id}}>
             <div class="form-group">
-                <label for="name">user name</label>
+                <label for="name">Your Friends!</label>
                 <select name="friend_id">
                 @foreach ($members as $member)
-                <option value={{$member->id}}>{{$member->name}}</option>
+                    @if ($member->id != $user_id)
+                        <option value={{$member->id}}>{{$member->name}}</option>
+                    @endif
                 @endforeach
                 </select>
             </div>
