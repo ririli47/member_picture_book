@@ -12,25 +12,25 @@
             </div>
         </div>
     </div>
-    
+
     <div class="row justify-content-center">
        <p>
-        Profile text area
+        {{$profile}}
         </p>
     </div>
 
     <div class="text-center">
         仲良い人リスト
         <div class="row justify-content-center">
-            <div class="col-md-4">
-                <p>human1</p>
-            </div>
-            <div class="col-md-4">
-                <p>human2</p>
-            </div>
-            <div class="col-md-4">
-                <p>human3</p>
-            </div>
+        @if (count($friends) == 0)
+            <p>No Friends...</p>
+        @else
+            @foreach ($friends as $friend)
+                <div class="col-md-4">
+                    <p>{{$friend->name}}</p>
+                </div>
+            @endforeach
+        @endif
         </div>
     </div>
 </div>
