@@ -21,3 +21,5 @@ Route::post('/home/edit', 'HomeController@update');
 
 Route::get('/friend/edit', 'FriendController@edit')->name('friend/edit');
 Route::post('/friend/edit', 'FriendController@update');
+
+Route::get('/member/{id}', 'MemberController@show')->name('member/home');

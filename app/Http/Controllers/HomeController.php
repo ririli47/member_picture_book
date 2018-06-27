@@ -29,8 +29,6 @@ class HomeController extends Controller
     {
         $user = Auth::user();
 
-
-
         $profile = UserProfile::where('user_id', $user->id)->first();
 
         if (!$profile)
