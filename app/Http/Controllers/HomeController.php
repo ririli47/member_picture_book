@@ -56,7 +56,6 @@ class HomeController extends Controller
     public function edit()
     {
         $user = Auth::user();
-        \Debugbar::info($user);
 
         $profile = UserProfile::where('user_id', $user->id)->first();
 
@@ -76,13 +75,8 @@ class HomeController extends Controller
     {
         $user = Auth::user();
         
-        \Debugbar::info($user);
-
-        // $this->Validate($request, UserProfile::$rules);
-
         $form = $request->all();
         unset($form['_token']);
-        \Debugbar::info($form);
         $user->fill($form)->save();
 
 
