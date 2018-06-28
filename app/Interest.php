@@ -19,6 +19,6 @@ class Interest extends Model
      * @var array
      */
     protected $fillable = [
-        'user_id','interest_user_id',
+        'user_id','interest_user_id','read',
     ];
 }

@@ -33,5 +33,13 @@
         @endif
         </div>
     </div>
+
+    <div class="row justify-content-center">
+        <div class="text-center">
+            @foreach ($interesteds as $interested)
+                <p>{{$interested->name}}さんがあなたのことを気になっています！</p>
+            @endforeach
+        </div>
+    </div>
 </div>
 @endsection

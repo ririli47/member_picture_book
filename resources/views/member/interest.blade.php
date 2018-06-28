@@ -11,15 +11,15 @@
         <p>※相手に通知が行きます。</p>
     </div>
 
-    TODO:なんかうごかない
-
-    <form action="/member/interest/" method="POST">
-        {{csrf_field()}}
-        <input type="hidden" name="user_id" id="user_id" value={{$user->id}}>
-        <input type="hidden" name="interest_user_id" id="interest_user_id" value={{$member->id}}}>
-        <input type="hidden" name="read" id="read" value="0">
-        <button type="submit" class="btn btn-primary">気になるを送る</input>
-    </form>
+    <div class="row justify-content-center">
+        <form action="/member/interest/" method="POST">
+            {{csrf_field()}}
+            <input type="hidden" name="user_id" id="user_id" value={{$user->id}}>
+            <input type="hidden" name="interest_user_id" id="interest_user_id" value={{$member->id}}>
+            <input type="hidden" name="read" id="read" value="0">
+            <button type="submit" class="btn btn-primary">気になるを送る</input>
+        </form>
+    </div>
 </div>
 
 @endsection
