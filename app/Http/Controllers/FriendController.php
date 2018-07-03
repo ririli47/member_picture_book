@@ -29,8 +29,6 @@ class FriendController extends Controller
         $friend = new Friend;
         $form = $request->all();
 
-        \Debugbar::info($form);
-
         unset($form['_token']);
         $friend->fill($form)->save();
         return redirect('/');
