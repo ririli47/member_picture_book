@@ -63,8 +63,6 @@ class MemberController extends Controller
         $interest = new Interest;
 
         $form = $request->all();
-
-        \Debugbar::info($form);
         
         unset($form['_token']);
         $interest->fill($form)->save();
