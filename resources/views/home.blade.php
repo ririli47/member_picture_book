@@ -7,7 +7,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="text-center">
-                <img src="/img/usapi1.png" class="rounded round-icon" alt="icon"><br>
+                <img src="/img/usapi1.png" class="rounded round-icon-home" alt="icon"><br>
                 {{$name}}
             </div>
         </div>
@@ -31,6 +31,14 @@
                 </div>
             @endforeach
         @endif
+        </div>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="text-center">
+            @foreach ($interesteds as $interested)
+                <p>{{$interested->name}}さんがあなたのことを気になっています！</p>
+            @endforeach
         </div>
     </div>
 </div>

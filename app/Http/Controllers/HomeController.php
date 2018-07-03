@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\User;
 use App\UserProfile;
 use App\Friend;
+use App\Interest;
 
 class HomeController extends Controller
 {
@@ -45,9 +46,19 @@ class HomeController extends Controller
             $friends[] = User::where('id', $friend_id->friend_id)->first();
         }
 
+
+        $interested_ids = Interest::where('interest_user_id', $user->id)->get();
+
+        $interested = Array();
+        foreach ($interested_ids as $interested_id)
+        {
+            $interested[] = User::where('id', $interested_id->user_id)->first();
+        }
+
         return view('home', ['name' => $user->name,
                              'profile' => $profile->profile,
-                             'friends' => $friends
+                             'friends' => $friends,
+                             'interesteds' => $interested
                              ]);
     }
 
