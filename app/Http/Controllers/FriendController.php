@@ -26,10 +26,14 @@ class FriendController extends Controller
 
     public function update(Request $request)
     {
-        $friend = new Friend;
-        $form = $request->all();
+        $friend = Friend::where('user_id', $request->user_id)->where('index', $request->index)->first();
 
-        \Debugbar::info($form);
+        if(!$friend)
+        {
+            $friend = new Friend;
+        }
+
+        $form = $request->all();
 
         unset($form['_token']);
         $friend->fill($form)->save();

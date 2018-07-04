@@ -6,11 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Friend extends Model
 {
-    protected $guarded = array('id');
-
     public static $rules = array(
         'user_id' => 'required',
-        'friend_id' => 'required'
+        'friend_id' => 'required',
+        'index' => 'required'
     );
 
     /**

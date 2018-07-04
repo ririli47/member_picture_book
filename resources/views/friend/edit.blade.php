@@ -9,6 +9,12 @@
             <input type="hidden" name="user_id" id="user_id" value={{$user_id}}>
             <div class="form-group">
                 <label for="name">Your Friends!</label>
+                <select name="index">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                </select
+                >
                 <select name="friend_id">
                 @foreach ($members as $member)
                     @if ($member->id != $user_id)
