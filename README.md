@@ -31,7 +31,7 @@ $ docker-compose build
 
 ```
 $ cd app
-$ git clone git@github.com:ririli47>/member_picture_book.git 
+$ git clone git@github.com:ririli47/member_picture_book.git 
 ```
 
 laravelの.envを編集
