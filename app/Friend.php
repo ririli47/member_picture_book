@@ -6,6 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Friend extends Model
 {
+    protected $primaryKey = null;
+
+    public $incrementing = false;
+
+
     public static $rules = array(
         'user_id' => 'required',
         'friend_id' => 'required',
@@ -18,6 +23,6 @@ class Friend extends Model
      * @var array
      */
     protected $fillable = [
-        'user_id','friend_id',
+        'user_id','friend_id', 'index'
     ];
 }
