@@ -2,11 +2,14 @@
 
 namespace App;
 
+use App\Traits\PrimaryIdTrait;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Collection;
 
 class User extends Authenticatable
 {
+    use PrimaryIdTrait;
     use Notifiable;
 
     /**
@@ -26,4 +29,12 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     * @return Collection|UserTag[]
+     */
+    public function getUserTags(): Collection
+    {
+        return UserTag::findByUserId($this->getId());
+    }
 }
