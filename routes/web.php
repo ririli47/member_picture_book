@@ -22,6 +22,10 @@ Route::post('/home/edit', 'HomeController@update');
 Route::get('/friend/edit', 'FriendController@edit')->name('friend/edit');
 Route::post('/friend/edit', 'FriendController@update');
 
-Route::get('/member/{id}', 'MemberController@show')->name('member/home');
+// tags
+Route::post('/member/tag', 'TagController@add')->name('tag/add');
+Route::delete('/member/tag', 'TagController@remove')->name('tag/remove');
+
+Route::get('/member/{id}', 'MemberController@show')->where('id', '[0-9]+')->name('member/home');
 Route::get('/member/interest/{id}', 'MemberController@interest');
 Route::post('/member/interest/', 'MemberController@create');
