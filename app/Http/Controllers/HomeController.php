@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Home\UserProfileImageChange;
+use App\Service\UserImageUploadService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\User;
@@ -78,6 +80,21 @@ class HomeController extends Controller
                              'user_id' => $user->id,
                              'profile' => $profile->profile
                              ]);
+    }
+
+    public function updateProfileImage(UserProfileImageChange $userProfileImageChange)
+    {
+        $image = $userProfileImageChange->file('image');
+
+        try {
+            (new UserImageUploadService)->upload(Auth::user(), $image);
+        } catch (\Throwable $e) {
+            dd($e);
+            logs()->error($e->getMessage());
+            return redirect()->route('home/edit')->with("message_error", "failed");
+        }
+
+        return redirect()->route('home/edit')->with("message_success", "success");
     }
 
     public function update(Request $request)

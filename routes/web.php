@@ -18,6 +18,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/home/edit', 'HomeController@edit')->name('home/edit');
 Route::post('/home/edit', 'HomeController@update');
+Route::post('/home/edit/profile_image', 'HomeController@updateProfileImage')->name('home/edit/profile_image');
 
 Route::get('/friend/edit', 'FriendController@edit')->name('friend/edit');
 Route::post('/friend/edit', 'FriendController@update');

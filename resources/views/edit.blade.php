@@ -17,5 +17,18 @@
             </div>
         <button type="submit" class="btn btn-primary mb-2">Profile Save</button>
     </form>
+
+    <h2>user image</h2>
+    <p>
+        <img src="{{ config('aws.user_image.url')."userimage.png" }}">
+    </p>
+    <form action="{{ route('home/edit/profile_image') }}" method="POST" enctype="multipart/form-data">
+        {{csrf_field()}}
+        <div class="form-group">
+            <label for="profile">profile image</label>
+            <input type="file" name="image" class="form-control" accept="image/*">
+        </div>
+        <button type="submit" class="btn btn-primary mb-2">Change profile image</button>
+    </form>
 </div>
 @endsection
