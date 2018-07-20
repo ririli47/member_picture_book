@@ -18,6 +18,8 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/home/edit', 'HomeController@edit')->name('home/edit');
 Route::post('/home/edit', 'HomeController@update');
+Route::post('/home/tag', 'HomeController@addTag')->name('home/addTag');
+Route::delete('/home/tag', 'HomeController@removeTag')->name('home/removeTag');
 
 Route::get('/friend/edit', 'FriendController@edit')->name('friend/edit');
 Route::post('/friend/edit', 'FriendController@update');

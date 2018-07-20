@@ -41,5 +41,34 @@
             @endforeach
         </div>
     </div>
+
+        <section>
+        <h3>タグ付け</h3>
+
+        <form method="post" action="{{ route('home/addTag') }}">
+            {{ csrf_field() }}
+            <input type="text" name="tag_name">
+            <input type="hidden" name="user_id" value="{{$user_id}}">
+            <input type="submit" value="add">
+        </form>
+
+        <ul>
+        @forelse ($user->getUserTags() as $userTag)
+            <li>
+                @php($tag = $userTag->getTag())
+                tag.id: {{ $tag->getId() }} / {{ $tag->getName() }}
+                <form style="display: inline-block" method="post" action="{{ route('home/removeTag') }}">
+                    {{ csrf_field() }}
+                    <input name="_method" type="hidden" value="DELETE">
+                    <input type="hidden" name="user_tag_id" value="{{ $userTag->getId() }}">
+                    <input type="submit" value="x">
+                </form>
+            </li>
+        @empty
+            <p>no tags.</p>
+        @endforelse
+        </ul>
+
+    </section>
 </div>
 @endsection
