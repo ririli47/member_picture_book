@@ -9,8 +9,7 @@ class Friend extends Model
 
     public static $rules = array(
         'user_id' => 'required',
-        'friend_id' => 'required',
-        'index' => 'required'
+        'friend_id' => 'required'
     );
 
     /**
@@ -19,6 +18,6 @@ class Friend extends Model
      * @var array
      */
     protected $fillable = [
-        'user_id','friend_id', 'index'
+        'user_id','friend_id'
     ];
 }
