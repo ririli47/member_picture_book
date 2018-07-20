@@ -36,16 +36,6 @@ class FriendController extends Controller
                                     ]);
     }
 
-    public function update(Request $request)
-    {
-        $friend = Friend::query()->where('user_id', $request->user_id)->first();
-
-
-        unset($form['_token']);
-        $friend->fill($form)->save();
-        return redirect('/');
-    }
-
     public function delete(Request $request) {
         $delete_terget = Friend::where('friend_id', $request->friend_id)
                                  ->where('user_id', $request->user_id)
