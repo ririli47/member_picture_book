@@ -86,7 +86,6 @@ class FriendController extends Controller
                                         'message' => $message
                                         ]);
 
-            // return redirect('/friend/edit');
         }
 
         $friend = new Friend;
