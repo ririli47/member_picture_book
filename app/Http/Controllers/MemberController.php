@@ -42,7 +42,8 @@ class MemberController extends Controller
         return view('member.home', ['name' => $member->name,
                                     'member_id' => $member->id,
                                     'profile' => $profile->profile,
-                                    'friends' => $friends
+                                    'friends' => $friends,
+                                    'member' => $member,
                                     ]);
     }
 
@@ -63,8 +64,6 @@ class MemberController extends Controller
         $interest = new Interest;
 
         $form = $request->all();
-
-        \Debugbar::info($form);
         
         unset($form['_token']);
         $interest->fill($form)->save();

@@ -34,12 +34,6 @@ class FriendController extends Controller
     {
         $friend = Friend::query()->where('user_id', $request->user_id)->first();
 
-        if(!$friend)
-        {
-            $friend = new Friend;
-        }
-
-        $form = $request->all();
 
         unset($form['_token']);
         $friend->fill($form)->save();
