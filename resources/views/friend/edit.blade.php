@@ -31,6 +31,9 @@
             @endforeach
             </select>
         </div>
+        @if($message != null)
+            <p>{{$message}}</p>
+        @endif
         <button type="submit" class="btn btn-primary mb-2">Make Friend</button>
     </form>
 </div>

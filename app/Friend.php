@@ -6,10 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Friend extends Model
 {
-    protected $primaryKey = null;
-
-    public $incrementing = false;
-
 
     public static $rules = array(
         'user_id' => 'required',
