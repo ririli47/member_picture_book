@@ -58,7 +58,7 @@ class HomeController extends Controller
         }
 
         return view('home', ['name' => $user->name,
-                             'profile' => $profile->profile,
+                             'profile' => $profile,
                              'friends' => $friends,
                              'interesteds' => $interested
                              ]);
@@ -66,19 +66,14 @@ class HomeController extends Controller
 
     public function edit()
     {
+        /** @var User $user */
         $user = Auth::user();
 
-        $profile = UserProfile::where('user_id', $user->id)->first();
-
-        if (!$profile)
-        {
-            $profile = new UserProfile;
-            $profile->$profile = "";
-        }
+        $profile = $user->getProfile();
 
         return view('edit', ['name' => $user->name,
                              'user_id' => $user->id,
-                             'profile' => $profile->profile
+                             'profile' => $profile,
                              ]);
     }
 

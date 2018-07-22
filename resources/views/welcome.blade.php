@@ -28,7 +28,7 @@
             <div class="col-md-4">
                 <div class="text-center">
                 <a href="/member/{{$member->id}}">
-                    <img src="/img/usapi1.png" class="rounded round-icon" alt="icon">
+                    <img src="{{ $member->getProfile()->getAvatarUrl() }}" class="rounded round-icon" alt="icon">
                 </a>
                 <br>
                     {{$member->name}}

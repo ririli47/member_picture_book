@@ -13,14 +13,14 @@
             </div>
             <div class="form-group">
                 <label for="profile">profile</label>
-                <input type="text" name="profile" class="form-control" id="profile" value="{{$profile}}">
+                <input type="text" name="profile" class="form-control" id="profile" value="{{$profile->profile}}">
             </div>
         <button type="submit" class="btn btn-primary mb-2">Profile Save</button>
     </form>
 
     <h2>user image</h2>
     <p>
-        <img src="{{ config('aws.user_image.url')."userimage.png" }}">
+        <img src="{{ $profile->getAvatarUrl() }}">
     </p>
     <form action="{{ route('home/edit/profile_image') }}" method="POST" enctype="multipart/form-data">
         {{csrf_field()}}
