@@ -18,17 +18,19 @@ class UserImageUploadService
             $request = new UserImageUploadRequest($user, $imageResized);
             $result = (new UserImageClient)->upload($request);
 
+            if (!$user->getProfile()->fill([
+               'avatar_path' => $result->getKey(),
+            ])->save()) {
+                throw new \RuntimeException('failed to sabe');
+            }
+
             return $result->isSucceed();
         } catch (\Throwable $e) {
-            // TODO: 自力で回復の余地なし
             logs()->error($e->getMessage());
             throw $e;
         } finally {
-            if (!@unlink($imageUploaded->getRealPath())) {
-                logs()->error("");
-            }
             if (!@unlink($imageResized->getRealPath())) {
-                logs()->error("");
+                logs()->error("failed to delete resize image:" . $imageResized->getRealPath());
             }
         }
     }
