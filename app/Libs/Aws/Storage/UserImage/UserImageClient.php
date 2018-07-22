@@ -20,9 +20,8 @@ class UserImageClient
 
         $result = $s3Client->putObject($imageUploadRequest->getArgs());
 
-        // TODO: $result をなんとかする
-
-        return new UserImageUploadResult();
+        return (new UserImageUploadResult($result))
+            ->withKey($imageUploadRequest->resolveKey());
     }
 }
 

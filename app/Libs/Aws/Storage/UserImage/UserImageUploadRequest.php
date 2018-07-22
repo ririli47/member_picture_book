@@ -3,6 +3,7 @@
 namespace App\Libs\Aws\Storage\UserImage;
 
 use App\User;
+use Ramsey\Uuid\Uuid;
 
 class UserImageUploadRequest
 {
@@ -33,8 +34,8 @@ class UserImageUploadRequest
         ];
     }
 
-    private function resolveKey(): string
+    public function resolveKey(): string
     {
-        return 'userimage.png';
+        return sprintf('avatar/%d/%s.png', $this->user->getId(), Uuid::uuid5(Uuid::NAMESPACE_OID, $this->user->getId()));
     }
 }
