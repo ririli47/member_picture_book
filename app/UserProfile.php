@@ -11,7 +11,8 @@ class UserProfile extends Model
 
     public static $rules = array(
         'user_id' => 'required',
-        'profile' => 'required'
+        'profile' => 'required',
+        'avatar_path' => ''
     );
 
     /**
@@ -20,6 +21,24 @@ class UserProfile extends Model
      * @var array
      */
     protected $fillable = [
-        'user_id','profile',
+        'user_id','profile', 'avatar_path',
     ];
+
+    public function hasAvatar(): bool
+    {
+        return !empty($this->avatar_path);
+    }
+
+    public function getDefaultAvatarUrl(): string
+    {
+        return sprintf('/img/avatar/default/%d.png', intval($this->user_id)%26);
+    }
+
+    public function getAvatarUrl(): string
+    {
+        if ($this->hasAvatar()) {
+            return config('aws.user_image.url').$this->avatar_path;
+        }
+        return $this->getDefaultAvatarUrl();
+    }
 }
