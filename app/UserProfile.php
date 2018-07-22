@@ -34,6 +34,11 @@ class UserProfile extends Model
         return sprintf('/img/avatar/default/%d.png', intval($this->user_id)%26);
     }
 
+    /**
+     * 表示するべきユーザ画像のurlを返す
+     *
+     * @return string
+     */
     public function getAvatarUrl(): string
     {
         if ($this->hasAvatar()) {

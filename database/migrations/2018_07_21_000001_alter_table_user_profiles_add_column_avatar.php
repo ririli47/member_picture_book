@@ -25,6 +25,8 @@ class AlterTableUserProfilesAddColumnAvatar extends Migration
      */
     public function down()
     {
-        //
+        Schema::table('user_profiles', function (Blueprint $table) {
+            $table->dropColumn('avatar_path');
+        });
     }
 }

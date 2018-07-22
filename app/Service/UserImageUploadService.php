@@ -9,6 +9,14 @@ use App\User;
 
 class UserImageUploadService
 {
+    /**
+     * ユーザー画像をリサイズしてDB+storageへ保存する
+     *
+     * @param User $user
+     * @param \SplFileInfo $imageUploaded
+     * @return bool
+     * @throws \Throwable
+     */
     public function upload(User $user, \SplFileInfo $imageUploaded): bool
     {
         // resize image
@@ -21,7 +29,7 @@ class UserImageUploadService
             if (!$user->getProfile()->fill([
                'avatar_path' => $result->getKey(),
             ])->save()) {
-                throw new \RuntimeException('failed to sabe');
+                throw new \RuntimeException('failed to save user profile');
             }
 
             return $result->isSucceed();
