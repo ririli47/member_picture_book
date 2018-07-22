@@ -37,4 +37,14 @@ class User extends Authenticatable
     {
         return UserTag::findByUserId($this->getId());
     }
+
+    /**
+     * @return UserProfile
+     */
+    public function getProfile(): UserProfile
+    {
+        return UserProfile::query()->firstOrNew([
+            'user_id' => $this->getId(),
+        ]);
+    }
 }
