@@ -48,7 +48,6 @@
         <form method="post" action="{{ route('home/addTag') }}">
             {{ csrf_field() }}
             <input type="text" name="tag_name">
-            <input type="hidden" name="user_id" value="{{$user_id}}">
             <input type="submit" value="add">
         </form>
 

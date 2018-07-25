@@ -61,7 +61,6 @@ class HomeController extends Controller
         }
 
         return view('home', ['name' => $user->name,
-                             'user_id' => $user->id,
                              'user' => $user,
                              'profile' => $profile->profile,
                              'friends' => $friends,
@@ -112,7 +111,8 @@ class HomeController extends Controller
 
     public function addTag(Request $request) 
     {
-        $user = User::findById($request->get('user_id'));
+        $user = Auth::User();
+
         $tagName = $request->get('tag_name');
 
         try {
@@ -123,7 +123,7 @@ class HomeController extends Controller
             session()->flash('message_alert', sprintf('failed to add tag: %s', $tagName));
         }
 
-        return redirect()->route('home', ['id' => $user->getId()]);
+        return redirect()->route('home');
     }
 
 
@@ -139,7 +139,7 @@ class HomeController extends Controller
             session()->flash('message_alert', sprintf('failed to remove tag'));
         }
 
-        return redirect()->route('home', ['id' => $user->getId()]);
+        return redirect()->route('home');
     }
 
 }
