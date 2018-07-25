@@ -84,7 +84,6 @@ class HomeController extends Controller
         try {
             (new UserImageUploadService)->upload(Auth::user(), $image);
         } catch (\Throwable $e) {
-            dd($e);
             logs()->error($e->getMessage());
             return redirect()->route('home/edit')->with("message_error", "failed");
         }
