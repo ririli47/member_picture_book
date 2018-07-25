@@ -20,7 +20,8 @@ Route::get('/home/edit', 'HomeController@edit')->name('home/edit');
 Route::post('/home/edit', 'HomeController@update');
 
 Route::get('/friend/edit', 'FriendController@edit')->name('friend/edit');
-Route::post('/friend/edit', 'FriendController@update');
+Route::post('/friend/delete', 'FriendController@delete');
+Route::post('/friend/add', 'FriendController@create');
 
 // tags
 Route::post('/member/tag', 'TagController@add')->name('tag/add');

@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Friend extends Model
 {
-    protected $guarded = array('id');
 
     public static $rules = array(
         'user_id' => 'required',
@@ -19,6 +18,6 @@ class Friend extends Model
      * @var array
      */
     protected $fillable = [
-        'user_id','friend_id',
+        'user_id','friend_id'
     ];
 }
