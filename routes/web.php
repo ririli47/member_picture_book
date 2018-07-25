@@ -19,9 +19,12 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/home/edit', 'HomeController@edit')->name('home/edit');
 Route::post('/home/edit', 'HomeController@update');
 Route::post('/home/edit/profile_image', 'HomeController@updateProfileImage')->name('home/edit/profile_image');
+Route::post('/home/tag', 'HomeController@addTag')->name('home/addTag');
+Route::delete('/home/tag', 'HomeController@removeTag')->name('home/removeTag');
 
 Route::get('/friend/edit', 'FriendController@edit')->name('friend/edit');
-Route::post('/friend/edit', 'FriendController@update');
+Route::post('/friend/delete', 'FriendController@delete');
+Route::post('/friend/add', 'FriendController@create');
 
 // tags
 Route::post('/member/tag', 'TagController@add')->name('tag/add');

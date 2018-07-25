@@ -10,27 +10,90 @@ use App\Friend;
 
 class FriendController extends Controller
 {
+
     public function edit()
     {
         $user = Auth::user();
 
-        $friends = Friend::where('user_id', $user->id)->get();
+        //idだけ
+        $friend_ids = Friend::where('user_id', $user->id)->get();
+
+        $friends = Array();
+        foreach($friend_ids as $id) {
+            $friends[] = User::where('id', $id->friend_id)->first();
+        }
 
         $members = User::orderBy('name')->get();
 
+        //エラーメッセージ用変数
+        //GETリクエスト時は空
+        $message = '';
+
         return view('friend.edit', ['user_id' => $user->id,
-                               'friends' => $friends,
-                               'members' => $members
-                               ]);
+                                    'friends' => $friends,
+                                    'members' => $members,
+                                    'message' => $message
+                                    ]);
     }
 
-    public function update(Request $request)
-    {
-        $friend = new Friend;
-        $form = $request->all();
+    public function delete(Request $request) {
+        $delete_terget = Friend::where('friend_id', $request->friend_id)
+                                 ->where('user_id', $request->user_id)
+                                 ->first();
 
+        $result = $delete_terget->delete();
+
+        if(!$result)
+        {
+            return redirect('/');
+        }
+        else
+        {
+            return redirect('/friend/edit');
+        }
+    }
+
+    public function create(Request $request) {
+
+        $make_target = Friend::where('friend_id', $request->friend_id)
+                               ->where('user_id', $request->user_id)
+                               ->first();
+
+        if($make_target != null) {
+            //すでに友達
+
+            //editへのgetと同じ処理...
+            //こういうのはサービスに切り出すべきなのかも
+            $user = Auth::user();
+
+            //idだけ
+            $friend_ids = Friend::where('user_id', $user->id)->get();
+    
+            $friends = Array();
+            foreach($friend_ids as $id) {
+                $friends[] = User::where('id', $id->friend_id)->first();
+            }
+    
+            $members = User::orderBy('name')->get();
+    
+
+            //エラーメッセージ用文言
+            $message = 'already friends!';
+
+            return view('friend.edit', ['user_id' => $user->id,
+                                        'friends' => $friends,
+                                        'members' => $members,
+                                        'message' => $message
+                                        ]);
+
+        }
+
+        $friend = new Friend;
+
+        $form = $request->all();
         unset($form['_token']);
+
         $friend->fill($form)->save();
-        return redirect('/');
+        return redirect('/friend/edit');
     }
 }

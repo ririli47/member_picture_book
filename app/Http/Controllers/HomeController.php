@@ -6,10 +6,15 @@ use App\Http\Requests\Home\UserProfileImageChange;
 use App\Service\UserImageUploadService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use App\Http\Requests\UserTagAdd;
+use App\Http\Requests\UserTagRemove;
+use App\Service\TagService;
 use App\User;
 use App\UserProfile;
 use App\Friend;
 use App\Interest;
+use App\UserTag;
+
 
 class HomeController extends Controller
 {
@@ -59,6 +64,7 @@ class HomeController extends Controller
 
         return view('home', ['name' => $user->name,
                              'profile' => $profile,
+                             'user' => $user,
                              'friends' => $friends,
                              'interesteds' => $interested
                              ]);
@@ -114,5 +120,37 @@ class HomeController extends Controller
         return redirect('home');
     }
 
+    public function addTag(Request $request) 
+    {
+        $user = Auth::User();
+
+        $tagName = $request->get('tag_name');
+
+        try {
+            $tag = (new TagService)->addToUser($user, $request->get('tag_name'));
+            session()->flash('message_success', sprintf('success to add tag: %s', $tagName));
+        } catch (\Throwable $e) {
+            logs()->error($e->getMessage());
+            session()->flash('message_alert', sprintf('failed to add tag: %s', $tagName));
+        }
+
+        return redirect()->route('home');
+    }
+
+
+    public function removeTag(UserTagRemove $request)
+    {
+        $userTag = UserTag::findById($request->get('user_tag_id'));
+        $user = User::findById($userTag->getUserId());
+
+        try {
+            (new TagService)->removeFromUser($userTag);
+        } catch (\Throwable $e) {
+            logs()->error($e->getMessage());
+            session()->flash('message_alert', sprintf('failed to remove tag'));
+        }
+
+        return redirect()->route('home');
+    }
 
 }
