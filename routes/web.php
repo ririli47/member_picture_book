@@ -18,6 +18,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/home/edit', 'HomeController@edit')->name('home/edit');
 Route::post('/home/edit', 'HomeController@update');
+Route::post('/home/edit/profile_image', 'HomeController@updateProfileImage')->name('home/edit/profile_image');
 Route::post('/home/tag', 'HomeController@addTag')->name('home/addTag');
 Route::delete('/home/tag', 'HomeController@removeTag')->name('home/removeTag');
 

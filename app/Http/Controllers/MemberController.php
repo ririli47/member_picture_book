@@ -41,7 +41,7 @@ class MemberController extends Controller
 
         return view('member.home', ['name' => $member->name,
                                     'member_id' => $member->id,
-                                    'profile' => $profile->profile,
+                                    'profile' => $profile,
                                     'friends' => $friends,
                                     'member' => $member,
                                     ]);

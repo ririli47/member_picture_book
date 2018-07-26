@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Home\UserProfileImageChange;
+use App\Service\UserImageUploadService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Http\Requests\UserTagAdd;
@@ -61,8 +63,8 @@ class HomeController extends Controller
         }
 
         return view('home', ['name' => $user->name,
+                             'profile' => $profile,
                              'user' => $user,
-                             'profile' => $profile->profile,
                              'friends' => $friends,
                              'interesteds' => $interested
                              ]);
@@ -70,20 +72,29 @@ class HomeController extends Controller
 
     public function edit()
     {
+        /** @var User $user */
         $user = Auth::user();
 
-        $profile = UserProfile::where('user_id', $user->id)->first();
-
-        if (!$profile)
-        {
-            $profile = new UserProfile;
-            $profile->$profile = "";
-        }
+        $profile = $user->getProfile();
 
         return view('edit', ['name' => $user->name,
                              'user_id' => $user->id,
-                             'profile' => $profile->profile
+                             'profile' => $profile,
                              ]);
+    }
+
+    public function updateProfileImage(UserProfileImageChange $userProfileImageChange)
+    {
+        $image = $userProfileImageChange->file('image');
+
+        try {
+            (new UserImageUploadService)->upload(Auth::user(), $image);
+        } catch (\Throwable $e) {
+            logs()->error($e->getMessage());
+            return redirect()->route('home/edit')->with("message_error", "failed");
+        }
+
+        return redirect()->route('home/edit')->with("message_success", "success");
     }
 
     public function update(Request $request)
