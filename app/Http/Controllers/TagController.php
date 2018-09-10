@@ -20,7 +20,9 @@ class TagController extends Controller
             session()->flash('message_success', sprintf('success to add tag: %s', $tagName));
         } catch (\Throwable $e) {
             logs()->error($e->getMessage());
-            session()->flash('message_alert', sprintf('failed to add tag: %s', $tagName));
+            return redirect()->back()->withErrors([
+                sprintf('failed to add tag: %s', $tagName)
+            ]);
         }
 
         return redirect()->route('member/home', ['id' => $user->getId()]);
@@ -33,9 +35,12 @@ class TagController extends Controller
 
         try {
             (new TagService)->removeFromUser($userTag);
+            session()->flash('message_success', 'remove succeed');
         } catch (\Throwable $e) {
             logs()->error($e->getMessage());
-            session()->flash('message_alert', sprintf('failed to remove tag'));
+            return redirect()->back()->withErrors([
+                sprintf('failed to remove tag')
+            ]);
         }
 
         return redirect()->route('member/home', ['id' => $user->getId()]);
