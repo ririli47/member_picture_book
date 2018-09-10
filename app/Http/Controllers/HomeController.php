@@ -89,12 +89,15 @@ class HomeController extends Controller
 
         try {
             (new UserImageUploadService)->upload(Auth::user(), $image);
+            session()->flash("message_success", "success uploading image");
         } catch (\Throwable $e) {
             logs()->error($e->getMessage());
-            return redirect()->route('home/edit')->with("message_error", "failed");
+            return redirect()->route('home/edit')->withErrors([
+                "failed to upload user image"
+            ]);
         }
 
-        return redirect()->route('home/edit')->with("message_success", "success");
+        return redirect()->route('home/edit');
     }
 
     public function update(Request $request)
@@ -116,8 +119,9 @@ class HomeController extends Controller
             $profile->profile = $request->profile;
             $profile->save();
         }
+        session()->flash("message_success", "success edit");
 
-        return redirect('home');
+        return redirect()->route('home/edit');
     }
 
     public function addTag(Request $request) 
@@ -131,7 +135,9 @@ class HomeController extends Controller
             session()->flash('message_success', sprintf('success to add tag: %s', $tagName));
         } catch (\Throwable $e) {
             logs()->error($e->getMessage());
-            session()->flash('message_alert', sprintf('failed to add tag: %s', $tagName));
+            return redirect()->back()->withErrors([
+                sprintf('failed to add tag: %s', $tagName)
+            ]);
         }
 
         return redirect()->route('home');
@@ -145,9 +151,12 @@ class HomeController extends Controller
 
         try {
             (new TagService)->removeFromUser($userTag);
+            session()->flash('message_success', 'remove succeed');
         } catch (\Throwable $e) {
             logs()->error($e->getMessage());
-            session()->flash('message_alert', sprintf('failed to remove tag'));
+            return redirect()->back()->withErrors([
+                sprintf('failed to remove tag')
+            ]);
         }
 
         return redirect()->route('home');

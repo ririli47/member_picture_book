@@ -83,6 +83,7 @@
         </nav>
 
         <main class="py-4">
+            @include('shared.messages')
             @yield('content')
         </main>
     </div>
