@@ -8,19 +8,27 @@
         <div class="col-md-8">
             <div class="text-center">
                 <img src="{{ $member->getProfile()->getAvatarUrl() }}" class="rounded round-icon-home" alt="icon"><br>
-                {{$name}}
+                <div class="user-name">
+                    {{$name}}
+                </div>
             </div>
         </div>
     </div>
 
     <div class="row justify-content-center">
-       <p>
-        {{$profile->profile}}
+        <p class="user-profile">
+            @if ($profile->profile != null)
+                {{$profile->profile}}
+            @else
+                No profile...
+            @endif
         </p>
     </div>
 
     <div class="text-center">
-        仲良い人リスト
+        <h4>
+            仲良い人リスト
+        </h4>
         <div class="row justify-content-center">
         @if (count($friends) == 0)
             <p>No Friends...</p>
@@ -37,15 +45,15 @@
     <div class="row justify-content-center">
         <a href="/member/interest/{{$member_id}}">
             <img src="/img/interest.png" class="rounded round-icon" alt="icon">
-            </br>
+            <br>
             <div class="text-center">
                 <p>きになる！</p>
             </div>
         </a>
     </div>
 
-    <section>
-        <h3>タグ付け</h3>
+    <section class="text-center tags">
+        <h4>タグ付け</h4>
 
         <form method="post" action="{{ route('tag/add') }}">
             {{ csrf_field() }}
