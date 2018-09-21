@@ -22,7 +22,6 @@
         </div>
     </div>
 
-
     <div class="row justify-content-center">
         @foreach ($members as $member)
             <div class="col-md-4">
@@ -36,5 +35,6 @@
             </div>
         @endforeach
     </div>
+
 </div>
 @endsection
