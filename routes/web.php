@@ -33,3 +33,5 @@ Route::delete('/member/tag', 'TagController@remove')->name('tag/remove');
 Route::get('/member/{id}', 'MemberController@show')->where('id', '[0-9]+')->name('member/home');
 Route::get('/member/interest/{id}', 'MemberController@interest');
 Route::post('/member/interest/', 'MemberController@create');
+
+Route::post('/search', 'SearchController@search')->name('search');
