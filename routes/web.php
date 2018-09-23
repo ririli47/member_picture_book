@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/', 'MemberController@index');
+Route::get('/', 'MemberController@index')->name('top');
 
 Auth::routes();
 
